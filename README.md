@@ -1,18 +1,25 @@
-# Alternative Macro Signals API Documentation
+<h1 align="center">
+    Alternative Macro Signals API
+</h1>
+<h3 align="center">
+ Macroeconomic data, generated from web scraping and Large Language Models 
+</h3>
 
-Welcome to the official documentation for the Alternative Macro Signals (AMS) API. This repository contains comprehensive documentation and examples for integrating with our macroeconomic data service.
+[AMS](https://alt.ms) derives macroeconomic signals from scanning the web. 
+We train Language Models to look for and digest news the way an experienced analyst would.
+Our main applications cover daily inflation data and commodities.
 
-[![API Status](https://img.shields.io/badge/API-Live-green)](https://alt.ms/status)
-[![Documentation](https://img.shields.io/badge/docs-up--to--date-brightgreen)](https://docs.alt.ms)
+[Reach out](https://alt.ms/contact) if you would like to know more.
+ 
+## 🚀 Quick Start
 
-## 🚀 Quick Start++
+Get the inflation signals from insurance prices in the US, with these few lines: 
 
-Get news statistics for the US market in just a few lines:
+### Obtain access token
 
 ```python
 import requests
 ```
-### Get access token
 
 ```python
 SERVICE_URL = "<service_url>" # Provided upon registration 
@@ -23,14 +30,14 @@ Both service URL and API key to be provided upon service registration.
 
 ### Query inflation news statistics
 
-To query news statistics (News Balance) associated with "insurance" news, in the US:
+To query news statistics (e.g. the News Balance) associated with "insurance" news, in the US:
 ```python
 params = {'location': 'US', 'txt': "insurance"} 
 headers = {'Authorization': f'Bearer {token}'}
 response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 print(response.json()[0]) # Latest news statistics
 ```
-will return XX
+will return News Sign, News Volume and Balance. 
 
 
 
@@ -45,49 +52,33 @@ will return XX
 -->
 
 
-### API Reference
-- Endpoints
+### API reference
+- [Endpoints](docs/api-reference/endpoints/endpoints.md)
   - [Authentication (/token)](docs/api-reference/endpoints/authentication.md)
   - [News Statistics (/nbstat)](docs/api-reference/endpoints/nbstat.md)
-- [Error Handling](docs/api-reference/errors.md)
-- [Rate Limits](docs/api-reference/rate-limits.md)
+- [Rate Limits](docs/api-reference/limits.md)
 
 ### Guides & Tutorials
-- [Best Practices](docs/guides/best-practices.md)
 - [Common Use Cases](docs/guides/common-use-cases.md)
 
-### Code Examples
-- [Python Examples](examples/python/)
-- [cURL Examples](examples/curl/)
-- [JavaScript Examples](examples/javascript/)
 
-## 🔑 Authentication
+## 💡 Contact
+- Support: [support@alternativemacrosignals.com](mailto:support@alternativemacrosignals.com)
 
-All API endpoints require authentication. You'll need an API key to access our services. 
-[Contact our support team](mailto:support@alternativemacrosignals.com) to obtain your API key.
 
-```python
-# Example authentication flow
-headers = {'X-API-Key': 'your-api-key'}
-token = requests.post('https://api.alt.ms/token', headers=headers).json()
-```
-## 📊 Available Endpoints
-Our API provides access to various macroeconomic data endpoints:
-- - Authentication endpoint `/token`
-- - News Volumes and News Balances `/nbstat`
-- `/newssearch` - Query news database
-- `/nipi` - Query NIPI time series
+- Info: [info@alternativemacrosignals.com](mailto:info@alternativemacrosignals.com)
 
-For detailed information about each endpoint, please refer to our [API Reference](docs/api-reference/).
-## 💡 Support
-- Email: support@alternativemacrosignals.com
-- [Submit an Issue](https://github.com/alternative-macro-signals/api-docs/issues)
-- [API Status Page](https://alt.ms/status)
 
 ## 📅 Changelog
 See our [CHANGELOG.md](CHANGELOG.md) for a list of changes and updates to our API.
-## 📝 License
+
+
+## Author
+
+[Laurent Bilke](https://alt.ms/m/lb)
+
+
 This documentation is licensed under [MIT License](LICENSE).
-## 🤝 Contributing
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+
 © 2025 Alternative Macro Signals. All rights reserved.

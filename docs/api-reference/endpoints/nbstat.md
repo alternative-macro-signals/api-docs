@@ -1,7 +1,16 @@
-# /nbstat Query News Stats 
+# `/nbstat` Query News Stats 
+   [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://alt.ms/status)
+
+[![Method](https://img.shields.io/badge/Method-GET-blue)](#)
+
+[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnbstat-important)](#)
+[![Authentication](https://img.shields.io/badge/Auth-Bearer%20Token-blue)](../authentication.md)
+[![Secure](https://img.shields.io/badge/Security-HTTPS-2EA44F)](../authentication.md)
 
 
-## Overview
+
+
+## 📌 Overview 
 
 The `/nbstat` endpoint provides access to news volume and news balance statistics, similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/).
 
@@ -9,7 +18,8 @@ The `/nbstat` endpoint provides access to news volume and news balance statistic
 
 Requires Bearer token authentication. [See Authentication](../authentication.md).
 
-## Query Parameters
+## 🗒️ Query Parameters 
+
 
 All parameters are optional.
 
@@ -139,4 +149,10 @@ Of the three, the daily balance is the closest to our NIPI metric (though not ex
 | 401         | Invalid or expired token |
 | 422         | Unexpected parameter     |
 | 429         | Rate limit exceeded      |
+
+---------------
+➡️ [Home](../../../README.md)
+
+
+➡️ API [Endpoints](docs/api-reference/endpoints/endpoints.md) 
 

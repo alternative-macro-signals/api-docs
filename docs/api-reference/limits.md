@@ -33,7 +33,7 @@ You can use the same token for multiple requests, tokens normally last 1 hour.
 ➡️ [Home](../../README.md)
 
 
-➡️ API [Endpoints](docs/api-reference/endpoints/endpoints.md) 
+➡️ API [Endpoints](endpoints/endpoints.md) 
 
 
 

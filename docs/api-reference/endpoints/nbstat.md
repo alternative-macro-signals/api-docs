@@ -24,15 +24,16 @@ Requires Bearer token authentication. [See Authentication](../authentication.md)
 
 All parameters are optional.
 
-| Parameter | Type   | Description                         | Default         | Accepted values                        |
-|-----------|--------|-------------------------------------|-----------------|----------------------------------------|
-| location  | string | Country name                        | None            | Country name, see supported list below |
-| start     | string | Start date (ISO format: YYYY-MM-DD) | 180 days ago    | Any date since `2020-01-01`            |
-| end       | string | End date (ISO format: YYYY-MM-DD)   | Yesterday       | Any date since `2020-01-01`            |
-| txt       | string | Text search with logical operators  | None            | See syntax below                       |
-| sector    | string | CPI sub-component                   | None (Headline) | `Core`, `Food` or `Energy`             |
-| sign      | string | Inflation sign filter               | None (all)      | `Positive`, `Neutral`, `Negative`      |
- 
+| Parameter | Type   | Description                           | Default         | Accepted values                        |
+|-----------|--------|---------------------------------------|-----------------|----------------------------------------|
+| location  | string | Country name                          | None            | Country name, see supported list below |
+| start     | string | Start date (ISO format: YYYY-MM-DD)   | 180 days ago    | Any date since `2020-01-01`            |
+| end       | string | End date (ISO format: YYYY-MM-DD)     | Yesterday       | Any date since `2020-01-01`            |
+| txt       | string | Text search with logical operators    | None            | See syntax below                       |
+| sector    | string | CPI sub-component                     | None (Headline) | `Core`, `Food` or `Energy`             |
+| sign      | string | Inflation sign filter                 | None (all)      | `Positive`, `Neutral`, `Negative`      |
+ | minrating | string | Minimum relevance rating, from 0 to 5 | 0               | `0`, `1`, `2`, `3`, `4`,`5`            |
+
 
 ### Supported Locations
 

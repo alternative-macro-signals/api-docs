@@ -1,7 +1,7 @@
-<h1 align="center">
-    Alternative Macro Signals API
+<h1 >
+    Alternative Macro Signals API <img src="./logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="80"  align="right">
 </h1>
-<h3 align="center">
+<h3 >
  Macroeconomic data, generated from web scraping and Large Language Models 
 </h3>
 
@@ -35,9 +35,9 @@ To query news statistics (e.g. the News Balance) associated with "insurance" new
 params = {'location': 'US', 'txt': "egg"} 
 headers = {'Authorization': f'Bearer {token}'}
 response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
-print(response.json()[0]) # Latest news statistics
+print(response.json()) 
 ```
-will return News Sign, News Volume and Balance. 
+to return News Sign, News Volume and Balance. 
 
 
 
@@ -83,4 +83,4 @@ See our [CHANGELOG.md](CHANGELOG.md) for a list of changes and updates to our AP
 This documentation is licensed under [MIT License](LICENSE).
 
 
-© 2025 Alternative Macro Signals. All rights reserved.
+© 2025 Alternative Macro Signals. All rights reserved. https://alt.ms <img src="./logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="30"  align="right">

@@ -12,7 +12,8 @@
 
 ## 📌 Overview 
 
-The `/nbstat` endpoint provides access to news volume and news balance statistics, similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/).
+The `/nbstat` endpoint provides access to news volume and news balance statistics, 
+broadly similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/), with a few additional features.
 
 ## Authentication
 
@@ -64,7 +65,7 @@ Note: `Euro area` aggregates all euro area countries without country weight.
 - `UK` 
 
 #### Asia and Oceania
-- `Australia`, 
+- `Australia` 
 - `China`
 - `Japan`
 - `New Zealand`

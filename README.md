@@ -13,7 +13,7 @@ Our main applications cover daily inflation data and commodities.
  
 ## 🚀 Quick Start
 
-Get the inflation signals from insurance prices in the US, with these few lines: 
+Get inflation metrics (balance of inflation news, volume of news, ...) about egg prices in the US: 
 
 ### Obtain access token
 
@@ -32,7 +32,7 @@ Both service URL and API key to be provided upon service registration.
 
 To query news statistics (e.g. the News Balance) associated with "insurance" news, in the US:
 ```python
-params = {'location': 'US', 'txt': "insurance"} 
+params = {'location': 'US', 'txt': "egg"} 
 headers = {'Authorization': f'Bearer {token}'}
 response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 print(response.json()[0]) # Latest news statistics
@@ -56,6 +56,8 @@ will return News Sign, News Volume and Balance.
 - [Endpoints](docs/api-reference/endpoints/endpoints.md)
   - [Authentication (/token)](docs/api-reference/endpoints/authentication.md)
   - [News Statistics (/nbstat)](docs/api-reference/endpoints/nbstat.md)
+  - NIPI *coming soon*
+  - Inflation NewsBot *coming soon*
 - [Rate Limits](docs/api-reference/limits.md)
 
 ### Guides & Tutorials

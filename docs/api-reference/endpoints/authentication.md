@@ -86,5 +86,5 @@ headers = {"Authorization": f"Bearer {token}"}
 ----------
 ➡️ [Home](../../../README.md)
 
-➡️ API [Endpoints](docs/api-reference/endpoints/endpoints.md) 
+➡️ API [Endpoints](endpoints.md) 
 

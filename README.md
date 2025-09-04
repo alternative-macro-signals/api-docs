@@ -13,31 +13,43 @@ Our main applications cover daily inflation data and commodities.
  
 ## 🚀 Quick Start
 
-Get inflation metrics (balance of inflation news, volume of news, ...) about egg prices in the US: 
+Get inflation metrics (balance of inflation news, volume of news, ...) about egg prices in the US, 
+using the `nbstat` endpoint.
 
-### Obtain access token
+You'll need: the `SERVICE_URL` and your `API_key`, both delivered by AMS upon registration.
 
+You have two options:
+
+### Option 1: our Python wrapper, [`ams-sdk`](/docs/sdk/python/ams-sdk.md) 
+```shell
+pip install ams-sdk
+```
+```python
+from ams_sdk.client import AMSClient
+
+client = AMSClient(service_url=SERVICE_URL, api_key=API_KEY)
+result = client.query_endpoint("/nbstat", params={"location": "US","txt": "egg"})
+```
+ 
+
+### Option 2: HTTP request methods
+
+Using Python, for instance.
+
+To authenticate:
 ```python
 import requests
-```
 
-```python
-SERVICE_URL = "<service_url>" # Provided upon registration 
-headers = {'X-API-Key': 'your-api-key'} 
+headers = {'X-API-Key': API_KEY} 
 token = requests.post(f'{SERVICE_URL}/token', headers=headers).json()
 ```
-Both service URL and API key to be provided upon service registration. 
-
-### Query inflation news statistics
-
-To query news statistics (e.g. the News Balance) associated with "insurance" news, in the US:
+ 
+Then use the token for the data quety:
 ```python
 params = {'location': 'US', 'txt': "egg"} 
 headers = {'Authorization': f'Bearer {token}'}
 response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
-print(response.json()) 
 ```
-to return News Sign, News Volume and Balance. 
 
 
 
@@ -61,6 +73,7 @@ to return News Sign, News Volume and Balance.
 - [Rate Limits](docs/api-reference/limits.md)
 
 ### Guides & Tutorials
+- [Python SDK](docs/sdk/python/ams-sdk.md)
 - [Common Use Cases](docs/guides/common-use-cases.md)
 
 

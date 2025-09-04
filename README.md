@@ -6,7 +6,7 @@
 </h3>
 
 [AMS](https://alt.ms) derives macroeconomic signals from scanning the web. 
-We train Language Models to look for and digest news the way an experienced analyst would.
+We train Language Models to search and analyze news the way an experienced analyst would.
 Our main applications cover daily inflation data and commodities.
 
 [Reach out](https://alt.ms/contact) if you would like to know more.

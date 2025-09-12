@@ -1,9 +1,9 @@
-# `/nipi` Query News Inflationary Pressures Indices Databases: NIPI, NVI, Entropy 
+# `/nbstat` Query News Stats 
    [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://alt.ms/status)
 
 [![Method](https://img.shields.io/badge/Method-GET-blue)](#)
 
-[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnipi-important)](#)
+[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnbstat-important)](#)
 [![Authentication](https://img.shields.io/badge/Auth-Bearer%20Token-blue)](../authentication.md)
 [![Secure](https://img.shields.io/badge/Security-HTTPS-2EA44F)](../authentication.md)
 
@@ -12,16 +12,8 @@
 
 ## 📌 Overview 
 
-The `/nipi` endpoint provides access to the [NIPI databases](https://alt.ms/nipi), providing daily inflation news
-measures for 23 countries.
-
-The `/nipi` endpoint represents the current data vintage. Small data revisions can happen within a 48 hours window. 
-To access vintages (point-in-time snapshots) of the data, please use the /nipipoi endpoint [forthcoming].
-
-Three main metrics are provided:
-- Daily balance score, $B_t$
-- Daily inflation news sign, $S_t$
-- Daily news volume, $V_t$
+The `/nbstat` endpoint provides access to news volume and news balance statistics, 
+broadly similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/), with a few additional features.
 
 ## Authentication
 

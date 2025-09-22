@@ -151,4 +151,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 
 
-© 2025 Alternative Macro Signals. All rights reserved. https://alt.ms <img src="./logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="30"  align="right">
+© 2025 Alternative Macro Signals. All rights reserved. https://alt.ms <img src="logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="30"  align="right">

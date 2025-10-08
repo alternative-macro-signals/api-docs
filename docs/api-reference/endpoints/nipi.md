@@ -14,6 +14,13 @@
 
 The `/nipi` endpoint provides access to the News Inflationary Pressures Indices, a daily diffusion index showing the balance of positive and negative short-term inflation news. 
 
+The `/nipi` endpoint provides access to the [NIPI databases](https://alt.ms/nipi), providing daily inflation news
+measures for 23 countries.
+
+The `/nipi` endpoint represents the current data vintage. Small data revisions can happen within a 48 hours window. 
+To access vintages (point-in-time snapshots) of the data, please use the /nipipoi endpoint [forthcoming].
+
+
 The reported indices fluctuate around 50 which is reached when the volume of positive and negative news are equal. A NIPI index value above (below) 50 suggests near-term inflation is about to increase (decrease). 
 
 

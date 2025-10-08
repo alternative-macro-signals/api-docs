@@ -11,17 +11,15 @@
 
 
 ## 📌 Overview 
-
-The `/nipi` endpoint provides access to the [NIPI databases](https://alt.ms/nipi), providing daily inflation news
-measures for 23 countries.
-
-The `/nipi` endpoint represents the current data vintage. Small data revisions can happen within a 48 hours window. 
-To access vintages (point-in-time snapshots) of the data, please use the /nipipoi endpoint [forthcoming].
+The `/nbstat` endpoint provides aggregated news statistics. The user can define a query for specific inflation news,
+including specifying a text search and the location, and will get in return detailed inflation metrics for the specific query.    
 
 Three main metrics are provided:
 - Daily balance score, $B_t$
 - Daily inflation news sign, $S_t$
 - Daily news volume, $V_t$
+
+The data is similar to AMS NewsBot app, with a extended coverage (daily data without smoothing and extended history).
 
 ## Authentication
 

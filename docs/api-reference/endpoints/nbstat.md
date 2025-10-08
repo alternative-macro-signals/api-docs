@@ -134,6 +134,7 @@ Each line of data in "content" gathers metrics for 1 day in a dictionary form, w
 The daily news volume, $V_t$ hereafter, is the number of inflation news observed on day *t*.
 
 The daily inflation news sign, or $S_t$, is defined as:
+
 $$
 S_t = \frac{\sum_{i=1}^{n} \rho^+_{i,t} - \sum_{i=1}^{n} \rho^-_{i,t}}{V_{t}}
 $$

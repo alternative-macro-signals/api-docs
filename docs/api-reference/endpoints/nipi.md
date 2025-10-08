@@ -12,7 +12,11 @@
 
 ## 📌 Overview 
 
-The `/nbstat` endpoint provides access to news volume and news balance statistics, 
+The `/nipi` endpoint provides access to the News Inflationary Pressures Indices, a daily diffusion index showing the balance of positive and negative short-term inflation news. 
+
+The reported indices fluctuate around 50 which is reached when the volume of positive and negative news are equal. A NIPI index value above (below) 50 suggests near-term inflation is about to increase (decrease). 
+
+
 broadly similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/), with a few additional features.
 
 ## Authentication
@@ -24,37 +28,38 @@ Requires Bearer token authentication. [See Authentication](../authentication.md)
 
 All parameters are optional.
 
-| Parameter | Type   | Description                           | Default         | Accepted values                        |
-|-----------|--------|---------------------------------------|-----------------|----------------------------------------|
-| location  | string | Country name                          | None            | Country name, see supported list below |
-| start     | string | Start date (ISO format: YYYY-MM-DD)   | 180 days ago    | Any date since `2020-01-01`            |
-| end       | string | End date (ISO format: YYYY-MM-DD)     | Yesterday       | Any date since `2020-01-01`            |
-| txt       | string | Text search with logical operators    | None            | See syntax below                       |
-| sector    | string | CPI sub-component                     | None (Headline) | `Core`, `Food` or `Energy`             |
-| sign      | string | Inflation sign filter                 | None (all)      | `Positive`, `Neutral`, `Negative`      |
- | minrating | string | Minimum relevance rating, from 0 to 5 | 0               | `0`, `1`, `2`, `3`, `4`,`5`            |
+| Parameter | Type   | Description                           | Default      | Accepted values                                                                       |
+|-----------|--------|---------------------------------------|--------------|---------------------------------------------------------------------------------------|
+| location  | string | Country name                          | `Global23`   | Country name, see supported list below                                                |
+| start     | string | Start date (ISO format: YYYY-MM-DD)   | 180 days ago | Any date since `2018-01-01`                                                           |
+| end       | string | End date (ISO format: YYYY-MM-DD)     | Yesterday    | Any date since `2018-01-02`                                                           |
+| sector    | string | NIPI sector                           | `Headline`    | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`. See detail below. |
 
 
 ### Supported Locations
 
 #### North America:
 - `Canada`
+- `Mexico`
 - `US`
 
-#### Euro area
- - `Austria`
-- `Belgium`
-- `Euro area`
-- `Finland`
+
+#### South America:
+- `Argentina`
+- `Chile`
+- `Colombia`
+- `Peru`
+
+
+
+#### Euro area countries
+- `Austria`
 - `France`
-- `Italy`
 - `Germany`
-- `Greece`
 - `Ireland`
-- `Netherlands`
-- `Portugal`
-- `Slovakia`
+- `Italy`
 - `Spain`
+ 
 
 Note: `Euro area` aggregates all euro area countries without country weight.
 
@@ -68,25 +73,34 @@ Note: `Euro area` aggregates all euro area countries without country weight.
 #### Asia and Oceania
 - `Australia` 
 - `China`
+- `India`
 - `Japan`
-- `New Zealand`
+- `Malaysia`
+- `Philippines`
 
+#### Africa
+- `Nigeria`
+- `South Africa`
 
-### Text Search Syntax
+#### Global and regional aggregates
+- `Euro area` (unweighted news from euro area countries)
+- `Global23` (country-weighted news from all above countries)
+- `all` (unweighted news from all above countries)
 
-The `txt` parameter supports:
-- Simple search: `"car insurance"`
-- OR operator: `"car OR auto"`
-- AND operator: `"car AND insurance"`
-- NOT operator: `"insurance NOT car"`
-- Multiple exclusions: `"insurance NOT car home house"`
+### Sector detals
 
+The `sector` parameter supports the following **Inflation** (consumer prices) measures.
 
-Notes:
-- One logical operator per expression
-- S-plural forms are automatically included (e.g "cars" with "car")
-- Operators must be uppercase
-- Keywords are case-insensitive
+- `Headline`: headline inflation
+- `Core`: inflation excluding food and energy
+- `Telecom`: telecom services 
+- `Food`: food inflation 
+- `Energy`: energy and other utilities (e.g. water)
+
+In addition, the following two sectors are included:
+- `Wages`: wage related news (e.g. news on minimum wage changes or wage negotiations round)
+- `All`: combined wage and inflation measure (i.e. `Headline` and `Wages` news)
+
 
 ## Example Request
 ```python

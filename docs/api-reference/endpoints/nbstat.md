@@ -1,4 +1,5 @@
-# `/nipi` Query News Inflationary Pressures Indices Databases: NIPI, NVI, Entropy 
+# `/nbstat` Query News Stats 
+
    [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://alt.ms/status)
 
 [![Method](https://img.shields.io/badge/Method-GET-blue)](#)

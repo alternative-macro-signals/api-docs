@@ -4,7 +4,7 @@
 
 [![Method](https://img.shields.io/badge/Method-GET-blue)](#)
 
-[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnipi-important)](#)
+[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnbstat-important)](#)
 [![Authentication](https://img.shields.io/badge/Auth-Bearer%20Token-blue)](../authentication.md)
 [![Secure](https://img.shields.io/badge/Security-HTTPS-2EA44F)](../authentication.md)
 

@@ -3,7 +3,7 @@
 
 [![Method](https://img.shields.io/badge/Method-GET-blue)](#)
 
-[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnbstat-important)](#)
+[![Endpoint](https://img.shields.io/badge/Endpoint-%2Fnipi-important)](#)
 [![Authentication](https://img.shields.io/badge/Auth-Bearer%20Token-blue)](../authentication.md)
 [![Secure](https://img.shields.io/badge/Security-HTTPS-2EA44F)](../authentication.md)
 
@@ -12,19 +12,16 @@
 
 ## 📌 Overview 
 
-The `/nipi` endpoint provides access to the News Inflationary Pressures Indices, a daily diffusion index showing the balance of positive and negative short-term inflation news. 
+The `/nipi` endpoint provides access to the [News Inflationary Pressures Indices](https://alt.ms/nipi), a daily diffusion index showing the balance of positive and negative short-term inflation news. 
 
-The `/nipi` endpoint provides access to the [NIPI databases](https://alt.ms/nipi), providing daily inflation news
-measures for 23 countries.
+The reported indices fluctuate around 50 which is reached when the volume of positive and negative news are equal. 
 
-The `/nipi` endpoint represents the current data vintage. Small data revisions can happen within a 48 hours window. 
-To access vintages (point-in-time snapshots) of the data, please use the /nipipoi endpoint [forthcoming].
+A NIPI index value above (below) 50 suggests near-term inflation is about to increase (decrease). 
 
+The NIPI aggregates news over the a 30-days rolling period.
 
-The reported indices fluctuate around 50 which is reached when the volume of positive and negative news are equal. A NIPI index value above (below) 50 suggests near-term inflation is about to increase (decrease). 
-
-
-broadly similar to our [Real-time NewsBot app](https://nb-data.alternativemacrosignals.com/), with a few additional features.
+The data accessible through the `/nipi` endpoint is the current data vintage. Small data revisions can happen within a 48 hours window. 
+Vintages (point-in-time snapshots) of the data will be available in the future through the `/nipipoi` endpoint.
 
 ## Authentication
 
@@ -35,12 +32,12 @@ Requires Bearer token authentication. [See Authentication](../authentication.md)
 
 All parameters are optional.
 
-| Parameter | Type   | Description                           | Default      | Accepted values                                                                       |
-|-----------|--------|---------------------------------------|--------------|---------------------------------------------------------------------------------------|
-| location  | string | Country name                          | `Global23`   | Country name, see supported list below                                                |
-| start     | string | Start date (ISO format: YYYY-MM-DD)   | 180 days ago | Any date since `2018-01-01`                                                           |
-| end       | string | End date (ISO format: YYYY-MM-DD)     | Yesterday    | Any date since `2018-01-02`                                                           |
-| sector    | string | NIPI sector                           | `Headline`    | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`. See detail below. |
+| Parameter | Type   | Description                         | Default      | Accepted values                                                    |
+|-----------|--------|-------------------------------------|--------------|--------------------------------------------------------------------|
+| location  | string | Country name                        | `Global23`   | Country name, see supported list below                             |
+| start     | string | Start date (ISO format: YYYY-MM-DD) | 180 days ago | Any date since `2018-01-01`                                        |
+| end       | string | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                        |
+| sector    | string | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All` |
 
 
 ### Supported Locations
@@ -66,9 +63,7 @@ All parameters are optional.
 - `Ireland`
 - `Italy`
 - `Spain`
- 
 
-Note: `Euro area` aggregates all euro area countries without country weight.
 
 #### Non-euro area Europe
 - `Denmark`
@@ -90,11 +85,13 @@ Note: `Euro area` aggregates all euro area countries without country weight.
 - `South Africa`
 
 #### Global and regional aggregates
-- `Euro area` (unweighted news from euro area countries)
-- `Global23` (country-weighted news from all above countries)
-- `all` (unweighted news from all above countries)
+- `Euro area`: four largest euro area countries country-weighted (Germany, France, Italy and Spain)
+- `Global23`:  all currently covered countries country-weighted
+- `all`: unweighted news from all above countries
 
-### Sector detals
+Note: country weights are detailed below.
+
+### Sectors
 
 The `sector` parameter supports the following **Inflation** (consumer prices) measures.
 
@@ -113,10 +110,9 @@ In addition, the following two sectors are included:
 ```python
 import requests
 params = { 'location': 'US', 
-           'start': '2025-01-01', 
-           'txt': 'insurance NOT car' } 
+           'sector': 'Core' } 
 headers = {'Authorization': f'Bearer {token}'} 
-response = requests.get(f'{SERVICE_URL}/nbstat', 
+response = requests.get(f'{SERVICE_URL}/nipi', 
                         headers=headers, 
                         params=params)
 ```
@@ -135,34 +131,71 @@ response = requests.get(f'{SERVICE_URL}/nbstat',
 ### Content Fields
 Each line of data in "content" gathers metrics for 1 day in a dictionary form, with the following fields:
 
-| Field      | Type    | Description                               |
-|------------|---------|-------------------------------------------|
-| date       | string  | Observation date, end of day (ISO format) |
-| sign_daily | float   | Daily inflation news sign (-1 to 1)       |
-| vol_daily  | integer | Daily news volume                         |
-| bal_daily  | float   | Daily balance score                       |
+| Field     | Type   | Description                               |
+|-----------|--------|-------------------------------------------|
+| date      | string | Observation date, end of day (ISO format) |
+| value     | float  | NIPI value for the day                    |
+| meta      | dict   | Metadata                                  |
 
-### Detailed metrics
 
-The daily news volume, $V_t$ hereafter, is the number of inflation news observed on day *t*.
 
-The daily inflation news sign, or $S_t$, is defined as:
+
+
+### NIPI computation
+
+
+On a given day:
+
 $$
-S_t = \frac{\sum_{i=1}^{n} \rho^+_{i,t} - \sum_{i=1}^{n} \rho^-_{i,t}}{V_{t}}
+NIPI* = (((entr_+ - entr_-) / S ) + 1 ) * 50 
 $$
 
-where
-$\rho^+_{i,t}$ is the probability of news i to be positive for inflation on the day, 
-and $\rho^-_{i,t}$ the probability of news i to be negative for inflation.
+for a given country, sector 
 
-$S_t$ is therefore the difference between the sum of positive probabilities and the sum of negative probabilities, 
-divided by the total number of news. It is therefore bound by -1 and 1.
+$entr_+$ measures are the sum of probability of news being positive (when proba > 0.60) and
+$entr_-$ the sum of probability of news being negative (when proba > 0.60).
 
-Finally, the daily balance score is defined as:
 
-$$B_t = V_t * S_t = \sum_{i=1}^{n} \rho^+_{i,t} - \sum_{i=1}^{n} \rho^-_{i,t}$$
 
-Of the three, the daily balance is the closest to our NIPI metric (though not exactly identical).
+
+S is a constant which is country, sector specific defined as: S = max(3, Q). Q is the 0.90 quantile value of the total number of news (relevant news, whatever their sign) series range over the period 1/1/18-31/12/2020. The pandas dataframe function used is df.quantile(q=0.9, interpolation="higher").
+
+The NIPI is the unweighted average of the last 30 daily NIPI* observations.
+
+
+### Country weights
+
+#### `Global23` aggregate
+* Argentina: 0.0113
+* Australia: 0.0149
+* Austria: 0.0056
+* Canada: 0.0212
+* Chile: 0.0053
+* China: 0.2675
+* Colombia: 0.0085
+* France: 0.0349
+* Germany: 0.0511
+* India: 0.1076
+* Ireland: 0.0055
+* Italy: 0.0289
+* Japan: 0.0596
+* Malaysia: 0.0103
+* Mexico: 0.0289
+* Nigeria: 0.0118
+* Peru: 0.0048
+* Philippines: 0.0107
+* South Africa: 0.0091
+* Spain: 0.0212
+* Switzerland: 0.0070
+* UK: 0.0351
+* US: 0.2391
+
+#### `Euro area` aggregate
+
+* France: 0.265 
+* Germany: 0.382 
+* Italy: 0.215 
+* Spain: 0.138 
 
 ### Error Responses
 

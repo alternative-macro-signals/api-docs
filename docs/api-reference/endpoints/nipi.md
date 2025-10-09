@@ -32,12 +32,12 @@ Requires Bearer token authentication. [See Authentication](../authentication.md)
 
 All parameters are optional.
 
-| Parameter | Type   | Description                         | Default      | Accepted values                                                    |
-|-----------|--------|-------------------------------------|--------------|--------------------------------------------------------------------|
-| location  | string | Country name                        | `Global23`   | Country name, see supported list below                             |
-| start     | string | Start date (ISO format: YYYY-MM-DD) | 180 days ago | Any date since `2018-01-01`                                        |
-| end       | string | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                        |
-| sector    | string | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All` |
+| Parameter | Type                       | Description                         | Default      | Accepted values                                                                                   |
+|-----------|----------------------------|-------------------------------------|--------------|---------------------------------------------------------------------------------------------------|
+| location  | string or list of strings  | Country name                        | `Global23`   | See supported location below <br/>`["US", "Canada"]` to query for both Canada and US NIPI data.   |
+| start     | string                     | Start date (ISO format: YYYY-MM-DD) | 180 days ago | Any date since `2018-01-01`                                                                       |
+| end       | string                     | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                                                       |
+| sector    | string  or list of strings | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`<br/> lists, eg `["Core","Food"]` |
 
 
 ### Supported Locations
@@ -85,7 +85,7 @@ All parameters are optional.
 - `South Africa`
 
 #### Global and regional aggregates
-- `Euro area`: four largest euro area countries country-weighted (Germany, France, Italy and Spain)
+- `EA`: Euro area proxy = four largest euro area countries country-weighted (Germany, France, Italy and Spain)
 - `Global23`:  all currently covered countries country-weighted
 - `all`: unweighted news from all above countries
 
@@ -147,7 +147,7 @@ Each line of data in "content" gathers metrics for 1 day in a dictionary form, w
 On a given day:
 
 $$
-NIPI* = (((entr_+ - entr_-) / S ) + 1 ) * 50 
+NIPI^* = (((entr_+ - entr_-) / S ) + 1 ) * 50 
 $$
 
 for a given country, sector 

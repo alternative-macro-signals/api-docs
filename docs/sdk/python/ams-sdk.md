@@ -74,16 +74,26 @@ Use the `query_endpoint` method to query specific AMS API endpoints:
 result = client.query_endpoint("/nbstat", params={
  "location": "Japan",
  "txt": "rice",
- "start": "2021-01-01"
+ "start": "2023-01-01",
+ "end": "2025-06-01"
+})
+print(result)
+```
+
+```python
+result = client.query_endpoint("/nipi", params={
+ "location": "China",
+ "sector": "Food",
 })
 print(result)
 ```
 
 
 
+
 ### Output
 
-Transfer the `nbstat` output in a Pandas dataframe:
+Transform the `/nbstat` or  `/nipi` output in a Pandas dataframe:
 
 ```python
 import pandas as pd
@@ -92,25 +102,37 @@ df['date'] = pd.to_datetime(df['date'])
 df = df.set_index('date')
 df.sort_index(inplace=True)
 ```
+
+In order to get 7-day and 30-day rolling balances from `/nbstat` (similar to the NewsBot app):
+```python
+df7 = df.rolling(7).mean()
+df30 = df.rolling(30).mean()
+```
+
+Note: NIPI is already a 30-day rolling diffusion index.
+
+
 ---
 ## API endpoints callable from `AMSClient` 🌐
 
 
-### [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
-[![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
+### [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
 
 Retrieve Inflation News Balance and News Volumes associated with specific text queries.
 
-### /nipi
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
+### [`/nipi`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
 
-Download NIPI data (meanwhile possible from the NIPI app or our CSV files endpoints)
+[//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
 
+Download NIPI data. 
 
-### /inb
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
+[//]: # ()
+[//]: # (### /inb)
 
-Inflation NewsBot daily lists (meanwhile possible through dedicated JSON endpoints).
+[//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
+
+[//]: # ()
+[//]: # (Inflation NewsBot daily lists &#40;meanwhile possible through dedicated JSON endpoints&#41;.)
 
 ----
 

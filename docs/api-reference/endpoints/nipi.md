@@ -23,9 +23,11 @@ The NIPI aggregates news over the a 30-days rolling period.
 The data accessible through the `/nipi` endpoint is the current data vintage. Small data revisions can happen within a 48 hours window. 
 Vintages (point-in-time snapshots) of the data will be available in the future through the `/nipipoi` endpoint.
 
+Can be called directly from our [Python SDK](../../sdk/python/ams-sdk.md).
+
 ## Authentication
 
-Requires Bearer token authentication. [See Authentication](../authentication.md).
+Requires Bearer token authentication. [See Authentication](authentication.md). 
 
 ## 🗒️ Query Parameters 
 
@@ -117,6 +119,8 @@ response = requests.get(f'{SERVICE_URL}/nipi',
                         headers=headers, 
                         params=params)
 ```
+
+See also our [Python SDK](../../sdk/python/ams-sdk.md).
 
 ## Response
 

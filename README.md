@@ -66,10 +66,9 @@ response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 
 ### API reference
 - [Endpoints](docs/api-reference/endpoints/endpoints.md)
-  - [Authentication (/token)](docs/api-reference/endpoints/authentication.md)
-  - [News Statistics (/nbstat)](docs/api-reference/endpoints/nbstat.md)
-  - NIPI *coming soon*
-  - Inflation NewsBot *coming soon*
+  - [Authentication (`/token`)](docs/api-reference/endpoints/authentication.md)
+  - [News Statistics (`/nbstat`)](docs/api-reference/endpoints/nbstat.md)
+  - [NIPI (`/nipi`)](docs/api-reference/endpoints/nipi.md)
 - [Rate Limits](docs/api-reference/limits.md)
 
 ### Guides & Tutorials

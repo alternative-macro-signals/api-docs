@@ -22,9 +22,11 @@ Three main metrics are provided:
 
 The data is similar to AMS NewsBot app, with a extended coverage (daily data without smoothing and extended history).
 
+Can be called directly from our [Python SDK](../../sdk/python/ams-sdk.md).
+
 ## Authentication
 
-Requires Bearer token authentication. [See Authentication](../authentication.md).
+Requires Bearer token authentication. [See Authentication](authentication.md).
 
 ## 🗒️ Query Parameters 
 
@@ -106,6 +108,7 @@ response = requests.get(f'{SERVICE_URL}/nbstat',
                         headers=headers, 
                         params=params)
 ```
+See also our [Python SDK](../../sdk/python/ams-sdk.md).
 
 ## Response
 

@@ -44,7 +44,7 @@ headers = {'X-API-Key': API_KEY}
 token = requests.post(f'{SERVICE_URL}/token', headers=headers).json()
 ```
  
-Then use the token for the data quety:
+Then use the token for the data query:
 ```python
 params = {'location': 'US', 'txt': "egg"} 
 headers = {'Authorization': f'Bearer {token}'}

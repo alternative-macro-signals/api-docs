@@ -215,5 +215,5 @@ The NIPI is the unweighted average of the last 30 daily NIPI* observations.
 ➡️ [Home](../../../README.md)
 
 
-➡️ API [Endpoints](docs/api-reference/endpoints/endpoints.md) 
+➡️ API [Endpoints](endpoints.md) 
 

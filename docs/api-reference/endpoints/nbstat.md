@@ -167,5 +167,5 @@ Of the three, the daily balance is the closest to our NIPI metric (though not ex
 ➡️ [Home](../../../README.md)
 
 
-➡️ API [Endpoints](docs/api-reference/endpoints/endpoints.md) 
+➡️ API [Endpoints](endpoints.md) 
 

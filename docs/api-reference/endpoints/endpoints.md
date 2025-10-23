@@ -11,16 +11,10 @@ Authentication, required before using the below endpoints
 
 Retrieve Inflation News Balance and News Volumes associated with specific text queries.
 
-## /nipi (forthcoming)
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
+## [`/nipi`](nipi.md)
+[![API Status](https://img.shields.io/badge/API-Live-brightgreen)](docs/api-reference/endpoints/nbstat.md)
 
 Download NIPI data (meanwhile possible from the NIPI app or our CSV files endpoints)
-
-
-## /inb (forthcoming)
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
-
-Inflation NewsBot daily lists (meanwhile possible through dedicated JSON endpoints).
 
 
 

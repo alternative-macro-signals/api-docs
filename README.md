@@ -77,14 +77,12 @@ response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 
 
 ## 💡 Contact
-- Support: [support@alternativemacrosignals.com](mailto:support@alternativemacrosignals.com)
-
-
 - Info: [info@alternativemacrosignals.com](mailto:info@alternativemacrosignals.com)
 
 
-## 📅 Changelog
-See our [CHANGELOG.md](CHANGELOG.md) for a list of changes and updates to our API.
+[//]: # (## 📅 Changelog)
+
+[//]: # (See our [CHANGELOG.md]&#40;CHANGELOG.md&#41; for a list of changes and updates to our API.)
 
 
 ## Author

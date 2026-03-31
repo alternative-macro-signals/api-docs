@@ -58,7 +58,6 @@ All parameters are optional.
 - `Peru`
 
 
-
 #### Euro area countries
 - `Austria`
 - `France`
@@ -69,11 +68,10 @@ All parameters are optional.
 
 
 #### Non-euro area Europe
-- `Denmark`
-- `Norway`
 - `Sweden`
 - `Switzerland`
 - `UK` 
+
 
 #### Asia and Oceania
 - `Australia` 
@@ -83,9 +81,11 @@ All parameters are optional.
 - `Malaysia`
 - `Philippines`
 
+
 #### Africa
 - `Nigeria`
 - `South Africa`
+
 
 #### Global and regional aggregates
 - `EA`: Euro area proxy = four largest euro area countries country-weighted (Germany, France, Italy and Spain)

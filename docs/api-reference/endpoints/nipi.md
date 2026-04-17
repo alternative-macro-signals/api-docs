@@ -41,6 +41,7 @@ All parameters are optional.
 | end       | string                     | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                                                                                                                           |
 | sector    | string  or list of strings | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`<br/> lists, eg `["Core","Food"]`                                                                   |
 | metric    | string                     | NIPI, NVI or Entropy                | `NIPI`       | `NIPI`, `NVI`, `Entropy`                                                                                                                                              |
+| sign      | string                     | Entropy sign filter (Entropy only)  | all signs    | `p_neg`, `p_pos`, `p_neu`                                                                                                                                             |
 
 
 ### Supported Locations
@@ -139,21 +140,24 @@ Each line of data in "content" gathers metrics for 1 day in a dictionary form, w
 | Field     | Type   | Description                               |
 |-----------|--------|-------------------------------------------|
 | date      | string | Observation date, end of day (ISO format) |
-| value     | float  | NIPI value for the day                    |
+| value     | float  | Metric value for the day                  |
 | meta      | dict   | Metadata                                  |
 
 ### Entropy Content Fields
-When `metric=Entropy`, each line of data in "content" includes entropy measures for a single day:
+When `metric=Entropy`, the response uses the same structure as NIPI/NVI. Each line of data in "content" represents one entropy measure for a single day:
 
-| Field      | Type   | Description                                         |
-|------------|--------|-----------------------------------------------------|
-| date       | string | Observation date, end of day (ISO format)           |
-| entr_neg   | float  | Negative sign entropy (sum of probabilities)        |
-| entr_pos   | float  | Positive sign entropy (sum of probabilities)        |
-| entr_neu   | float  | Neutral sign entropy (sum of probabilities)         |
-| meta       | dict   | Metadata                                            |
+| Field     | Type   | Description                               |
+|-----------|--------|-------------------------------------------|
+| date      | string | Observation date, end of day (ISO format) |
+| value     | float  | Entropy value                             |
+| meta      | dict   | Metadata (includes `metric_2` field)      |
 
-Entropy values represent the sum of model-based probabilities of news being positive, negative, or neutral (only when individual probability > 0.60).
+The `meta.metric_2` field identifies which entropy measure the value represents:
+- `p_neg`: negative sign entropy
+- `p_pos`: positive sign entropy
+- `p_neu`: neutral sign entropy
+
+If no `sign` parameter is provided, all three entropy measures are returned (3 rows per date/location/sector).
 
 
 
@@ -183,9 +187,9 @@ The NIPI is the unweighted average of the last 30 daily NIPI* observations.
 Entropy measures the cumulative probability mass for news classified by sign (positive, negative, or neutral).
 
 For each news article with probability exceeding 0.60:
-- If classified as **positive**: contributes to `entr_pos`
-- If classified as **negative**: contributes to `entr_neg`
-- If classified as **neutral**: contributes to `entr_neu`
+- If classified as **positive**: contributes to `p_pos`
+- If classified as **negative**: contributes to `p_neg`
+- If classified as **neutral**: contributes to `p_neu`
 
 These entropy values are the building blocks used to compute the NIPI index.
 

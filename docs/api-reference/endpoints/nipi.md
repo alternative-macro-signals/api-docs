@@ -40,7 +40,7 @@ All parameters are optional.
 | start     | string                     | Start date (ISO format: YYYY-MM-DD) | 180 days ago | Any date since `2018-01-01`                                                                                                                                           |
 | end       | string                     | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                                                                                                                           |
 | sector    | string  or list of strings | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`<br/> lists, eg `["Core","Food"]`                                                                   |
-| metric    | string                     | NIPI or NVI                         | `NIPI`       | `NIPI`, `NVI`                                                                                                                                                         |
+| metric    | string                     | NIPI, NVI or Entropy                | `NIPI`       | `NIPI`, `NVI`, `Entropy`                                                                                                                                              |
 
 
 ### Supported Locations
@@ -142,7 +142,18 @@ Each line of data in "content" gathers metrics for 1 day in a dictionary form, w
 | value     | float  | NIPI value for the day                    |
 | meta      | dict   | Metadata                                  |
 
+### Entropy Content Fields
+When `metric=Entropy`, each line of data in "content" includes entropy measures for a single day:
 
+| Field      | Type   | Description                                         |
+|------------|--------|-----------------------------------------------------|
+| date       | string | Observation date, end of day (ISO format)           |
+| entr_neg   | float  | Negative sign entropy (sum of probabilities)        |
+| entr_pos   | float  | Positive sign entropy (sum of probabilities)        |
+| entr_neu   | float  | Neutral sign entropy (sum of probabilities)         |
+| meta       | dict   | Metadata                                            |
+
+Entropy values represent the sum of model-based probabilities of news being positive, negative, or neutral (only when individual probability > 0.60).
 
 
 
@@ -166,6 +177,17 @@ $entr_-$ the sum of probability of news being negative (when proba > 0.60).
 S is a constant which is country, sector specific defined as: S = max(3, Q). Q is the 0.90 quantile value of the total number of news (relevant news, whatever their sign) series range over the period 1/1/18-31/12/2020. The pandas dataframe function used is df.quantile(q=0.9, interpolation="higher").
 
 The NIPI is the unweighted average of the last 30 daily NIPI* observations.
+
+### Entropy Definition
+
+Entropy measures the cumulative probability mass for news classified by sign (positive, negative, or neutral).
+
+For each news article with probability exceeding 0.60:
+- If classified as **positive**: contributes to `entr_pos`
+- If classified as **negative**: contributes to `entr_neg`
+- If classified as **neutral**: contributes to `entr_neu`
+
+These entropy values are the building blocks used to compute the NIPI index.
 
 
 ### Country weights

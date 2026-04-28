@@ -74,6 +74,8 @@ response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 ### Guides & Tutorials
 - [Python SDK](docs/sdk/python/ams-sdk.md)
 - [Common Use Cases](docs/guides/nbstat-implementation.md)
+- [NIPI Use Cases](docs/guides/nipi-use-cases.md)
+- [Entropy Use Cases](docs/guides/entropy-use-cases.md)
 
 
 ## 💡 Contact

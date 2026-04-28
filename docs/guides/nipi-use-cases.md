@@ -229,4 +229,5 @@ Data from the AMS API.*
   extended case studies.
 - [`/nipi` endpoint reference](../api-reference/endpoints/nipi.md)
 - [`/nbstat` use cases](use-cases.md)
+- [Entropy use cases](entropy-use-cases.md)
 - [Python SDK](../sdk/python/ams-sdk.md)

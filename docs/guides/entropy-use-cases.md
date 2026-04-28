@@ -284,4 +284,6 @@ axis) vs CPI Headline m/m % (red dots, right axis). Data from the AMS API and OE
 - &#x1F517; [Blog](https://alt.ms/blog) for historical illustrations and
   extended case studies.
 - [`/nipi` endpoint reference](../api-reference/endpoints/nipi.md)
+- [NIPI use cases](nipi-use-cases.md)
+- [`/nbstat` use cases](nbstat-implementation.md)
 - [Python SDK](../sdk/python/ams-sdk.md)

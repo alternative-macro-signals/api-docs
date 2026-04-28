@@ -73,7 +73,7 @@ response = requests.get(f'{SERVICE_URL}/nbstat', headers=headers, params=params)
 
 ### Guides & Tutorials
 - [Python SDK](docs/sdk/python/ams-sdk.md)
-- [Common Use Cases](docs/guides/use-cases.md)
+- [Common Use Cases](docs/guides/nbstat-implementation.md)
 
 
 ## 💡 Contact

@@ -69,7 +69,6 @@ All parameters are optional.
 
 
 #### Non-euro area Europe
-- `Sweden`
 - `Switzerland`
 - `UK` 
 

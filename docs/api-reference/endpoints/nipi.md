@@ -41,7 +41,15 @@ All parameters are optional.
 | end       | string                     | End date (ISO format: YYYY-MM-DD)   | Yesterday    | Any date since `2018-01-02`                                                                                                                                           |
 | sector    | string  or list of strings | NIPI sector                         | `Headline`   | `Headline`, `Core`, `Telecom`,`Food`, `Energy`,<br/>`Wages`, `All`<br/> lists, eg `["Core","Food"]`                                                                   |
 | metric    | string                     | NIPI, NVI or Entropy                | `NIPI`       | `NIPI`, `NVI`, `Entropy`                                                                                                                                              |
-| sign      | string                     | Entropy sign filter (Entropy only)  | all signs    | `p_neg`, `p_pos`, `p_neu`                                                                                                                                             |
+| sign      | string or list of strings  | Entropy sign filter (Entropy only)  | all signs    | `p_neg`, `p_pos`, `p_neu`<br/> lists, eg `["p_neg","p_pos"]`                                                                                                          |
+
+Multi-value parameters (`location`, `sector`, `sign`) can be passed as a
+repeated parameter (`?location=US&location=Canada`), comma-separated
+(`?location=US,Canada`), or — with the Python `requests` library / our SDK —
+as a list (`params={'location': ['US', 'Canada']}`). The matching series are
+returned side by side in one response, each row tagged by its `meta` fields
+(no aggregation). Unknown `location`, `sector`, `metric` or `sign` values
+return `422` listing the accepted values.
 
 
 ### Supported Locations
@@ -229,12 +237,12 @@ These entropy values are the building blocks used to compute the NIPI index.
 
 ### Error Responses
 
-| Status Code | Description              |
-|-------------|--------------------------|
-| 400         | Invalid parameters       |
-| 401         | Invalid or expired token |
-| 422         | Unexpected parameter     |
-| 429         | Rate limit exceeded      |
+| Status Code | Description                                                                              |
+|-------------|------------------------------------------------------------------------------------------|
+| 400         | Invalid parameters                                                                       |
+| 401         | Invalid or expired token                                                                 |
+| 422         | Unexpected parameter, unknown `location`/`sector`/`metric`/`sign` value, or invalid date |
+| 429         | Rate limit exceeded                                                                      |
 
 ---------------
 ➡️ [Home](../../../README.md)

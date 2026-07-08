@@ -31,17 +31,44 @@ Requires Bearer token authentication. [See Authentication](authentication.md).
 ## 🗒️ Query Parameters 
 
 
-All parameters are optional.
+All parameters are optional, except `location` (a request without it returns `422`).
 
-| Parameter | Type   | Description                           | Default         | Accepted values                        |
-|-----------|--------|---------------------------------------|-----------------|----------------------------------------|
-| location  | string | Country name                          | None            | Country name, see supported list below |
-| start     | string | Start date (ISO format: YYYY-MM-DD)   | 180 days ago    | Any date since `2020-01-01`            |
-| end       | string | End date (ISO format: YYYY-MM-DD)     | Yesterday       | Any date since `2020-01-01`            |
-| txt       | string | Text search with logical operators    | None            | See syntax below                       |
-| sector    | string | CPI sub-component                     | None (Headline) | `Core`, `Food` or `Energy`             |
-| sign      | string | Inflation sign filter                 | None (all)      | `Positive`, `Neutral`, `Negative`      |
- | minrating | string | Minimum relevance rating, from 0 to 5 | 0               | `0`, `1`, `2`, `3`, `4`,`5`            |
+| Parameter | Type           | Description                           | Default         | Accepted values                          |
+|-----------|----------------|---------------------------------------|-----------------|------------------------------------------|
+| location  | string or list | Country name(s)                       | — (required)    | Country names, see supported list below  |
+| start     | string         | Start date (ISO format: YYYY-MM-DD)   | 180 days ago    | Any date since `2020-01-01`              |
+| end       | string         | End date (ISO format: YYYY-MM-DD)     | Yesterday       | Any date since `2020-01-01`              |
+| txt       | string         | Text search with logical operators    | None            | See syntax below                         |
+| sector    | string or list | CPI sub-component(s)                  | None (Headline) | `Core`, `Food`, `Energy` — see combinations below |
+| sign      | string or list | Inflation sign filter                 | None (all)      | `Positive`, `Negative`, `Undefined` (`Neutral` is accepted as an alias for `Undefined`) |
+| minrating | string         | Minimum relevance rating, from 0 to 5 | 0               | `0`, `1`, `2`, `3`, `4`,`5`              |
+
+Unknown `sector` or `sign` values return `422` with the allowed values.
+
+### Multi-value parameters
+
+`location`, `sector` and `sign` accept several values, passed either as a
+repeated parameter (`?location=US&location=UK`) or comma-separated
+(`?location=US,UK`). With the Python `requests` library or our SDK, simply
+pass a list: `params={'location': ['US', 'UK']}`.
+
+Multiple values return **one combined aggregate series** computed over the
+merged news set (as in the NewsBot app's multi-select filters) — not one
+series per value. Passing `Euro area` together with individual euro area
+countries does not double count: the member countries are subsumed by the
+aggregate.
+
+Sector combinations map to the following filters:
+
+| `sector` value(s)              | News included                   |
+|--------------------------------|---------------------------------|
+| omitted, or `Core,Food,Energy` | Headline (all news)             |
+| `Core`                         | Core only                       |
+| `Food`                         | Food only                       |
+| `Energy`                       | Energy only                     |
+| `Food,Energy`                  | Non-core                        |
+| `Core,Energy`                  | All except food-dominant news   |
+| `Core,Food`                    | All except energy-dominant news |
 
 
 ### Supported Locations
@@ -108,6 +135,15 @@ response = requests.get(f'{SERVICE_URL}/nbstat',
                         headers=headers, 
                         params=params)
 ```
+
+With multiple values (combined aggregate over US + UK, core excluding food-dominant news):
+```python
+params = { 'location': ['US', 'UK'],
+           'sector': ['Core', 'Energy'] }
+response = requests.get(f'{SERVICE_URL}/nbstat', 
+                        headers=headers, 
+                        params=params)
+```
 See also our [Python SDK](../../sdk/python/ams-sdk.md).
 
 ## Response
@@ -156,12 +192,12 @@ Of the three, the daily balance is the closest to our NIPI metric (though not ex
 
 ### Error Responses
 
-| Status Code | Description              |
-|-------------|--------------------------|
-| 400         | Invalid parameters       |
-| 401         | Invalid or expired token |
-| 422         | Unexpected parameter     |
-| 429         | Rate limit exceeded      |
+| Status Code | Description                                                              |
+|-------------|--------------------------------------------------------------------------|
+| 400         | Invalid parameters                                                       |
+| 401         | Invalid or expired token                                                 |
+| 422         | Unexpected parameter, missing `location`, or unknown `sector`/`sign` value |
+| 429         | Rate limit exceeded                                                      |
 
 ---------------
 ➡️ [Home](../../../README.md)
